@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  mysterium:
+    image: mysteriumnetwork/myst:latest
+    restart: always
+    expose:
+      - 4449
+      - 1194
+      - 4050
+    ports:
+      - 4449:4449
+      - 1194:1194
+      - 4050:4050
+      - 59850-60000:59850-60000/udp
+    cap_add:
+      - NET_ADMIN
+    command: 
+      - "--udp.ports=59850:60000"
+      - "service --agreed-terms-and-conditions"
+    volumes:
+      - ./myst-data:/var/lib/mysterium-node
